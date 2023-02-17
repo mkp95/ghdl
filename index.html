@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>GitHub Direct Download Link Generator</h2>
+  <input type="url" id="repo" name="repo" value="" placeholder="Repo URL"><br>
+  <button onclick="dnld()">Dnld</button><br>
+  <a href="" id=rel>Latest Release</a><br>
+	<a href="" id=zip>Latest Zip</a>
+</body>
+<script>
+function dnld(){
+url = document.getElementById("url").value;
+var repo = url.split("/");
+own = repo[3];
+rep = repo[4];
+dl = await fetch("https://api.github.com/repos/"+own+"/"+rep+"/releases/latest",);
+dl = await dl.json();
+document.getElementById("rel").href = dl.assets[0].browser_download_url;
+document.getElementById("zip").href = dl.zipball_url;
+}
+</script>
+</html>
